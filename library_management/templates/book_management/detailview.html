@@ -1,0 +1,46 @@
+{% extends "book_management/base.html" %}
+{% block body_block %}
+
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-10 offset-1">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">DETAIL VIEW</h1>
+                    <table class="table table-bordered primary">
+                        <ul>
+        
+                            <li style="color: chartreuse;font-weight: bold;">Author = {{ object.Author}}</li>
+                            <br>
+                            <li style="color: brown;font-weight: bolder; ">Book = {{object.Name_Of_Book}}</li>
+                            <br>
+                            <li style="color: blueviolet;font-size: larger; ">Available = {{object.Available}}</li>
+                            <br>
+                            <li style="color: crimson;">genere={{object.Geners}}</li>
+                            
+                        </ul>
+                    </table>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+<div class="d-flex justify-content-around">
+ 
+    
+    {% if request.user.userid.user_type == 'teacher' %}
+<a href="{% url 'book_management:UpdateView' pk=object.id %}"><button class="btn btn-warning btn-lg btn-block" type="button">UPDATE</button></a>     
+<a href="{% url 'book_management:DeleteView' pk=object.id  %}"><button type="button" class="btn btn-danger btn-lg btn-block">DELETE</button></a>    
+<a href="{{ request.META.HTTP_REFERER }}"><button type="button" class="btn btn-success btn-lg btn-block">BACK</button> </a> 
+<!-- <a href="{% url 'book_management:BookRequested' pk=object.id %}"><button class="btn btn-dark btn-lg btn-block" type="button">REQUESTS</button></a>     -->
+    {% else %}
+    
+    <a href="{{ request.META.HTTP_REFERER }}"><button type="button" class="btn btn-success btn-lg btn-block">BACK</button> </a> 
+    <a href="{% url 'book_management:BookRequested'  pk=object.id %}"><button class="btn btn-warning btn-lg btn-block" type="button">MAKE REQUESTS</button></a> 
+</div>       
+{% endif %}
+    {% endblock %}

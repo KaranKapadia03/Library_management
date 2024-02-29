@@ -1,0 +1,38 @@
+{% extends "book_management/base.html" %}
+{% block body_block %}
+{% if request.resolver_match.url_name == 'UpdateView' %}     
+
+<h1 style="color: crimson;">Update VIEW</h1>
+
+{% elif request.resolver_match.url_name == 'DeleteView' %}
+<h1 style="size: 50vh;">DELETE VIEW</h1>
+<h1 style="color: red;">we are deleting </h1>
+<h2 style="color: brown;">{{object.Name_Of_Book}} <span style="color: greenyellow;">by</span> <span style="color: blueviolet;">{{object.Author}}</span> </h2>
+ 
+{% else %}
+<h1 style="color: cornflowerblue; text-align: center;">CREATE views</h1>
+{% endif %}
+
+<br><br><br><br>
+<div class="container">
+    <div class="card-body">
+        <form method="post" >
+        {% csrf_token %}
+        {{ form.as_p }}
+       
+        <div class="d-grid gap-2 mt-3">
+            <a type="button" class="btn btn-danger" href = "{{ request.META.HTTP_REFERER}}">BACK</a>
+            <button class="btn btn-primary btn-block" type="submit">submit</button>
+          </div>
+    </div>
+    </div>
+</div>
+    
+    
+
+</form>
+
+
+
+
+{% endblock %}

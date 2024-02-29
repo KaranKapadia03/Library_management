@@ -1,0 +1,57 @@
+{% extends "book_management/base.html" %}
+{% block body_block %}
+{% load render_table from django_tables2 %}
+
+{% if request.user.userid.user_type == 'student' %}
+<br>
+<div><h5> Welcome {{user}} , How is your {{user.userid.user_type}} life going</h5></div>
+
+    <form class="container"  method="get">
+         {{filter.form.as_table}}
+        <button class="btn btn-success">SEARCH</button>
+    {% if filter.form.data %}
+        <a href="{% url 'book_management:FormsShow' %}">
+         <button type="button" class="btn btn-primary">Clear</button>
+        </a>
+    {% endif %}      
+{% else %}
+<br>
+<div ><h5>Welcome {{user}} , How is your {{user.userid.user_type}} life going</h5></div>
+<form class="container"  method="get">
+    {{filter.form.as_table}}
+    <button class="btn btn-success">SEARCH</button>
+    {% if filter.form.data %}
+        <a href="{% url 'book_management:FormsShow' %}">
+         <button type="button" class="btn btn-primary">Clear</button>
+        </a>
+    
+        {% endif %}
+</form>            
+<hr>
+<div class="d-flex justify-content-around">
+<form action="{% url 'export_to_excel' %}" method="post"  >
+    {% csrf_token %}
+    <button class="btn btn-warning" type="submit">Download Excel</button>
+</form>
+<a href="{% url 'book_management:generate_pdf'%}"><button class="btn btn-primary" type="submit">GENERATE PDF</button></a>
+<a href="{% url 'book_management:upload_excel'%}"><button class="btn btn-info" type='submit'>GET EXCEL DATA </button></a>    
+<a href="{% url 'book_management:FormFIll'%}"><button class="btn btn-danger" type="submit">CREATE VIEW</button></a>
+</div>
+<br>
+{% endif %}
+<br><br>
+<section class="section">
+    <div class="row">
+        <div class="col-lg-10 offset-1">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Book List</h5>
+                    <table class="table table-bordered primary">
+                        {% render_table table %}
+                    </table>
+                </div> 
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

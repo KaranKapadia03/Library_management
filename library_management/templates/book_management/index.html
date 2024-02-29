@@ -1,0 +1,19 @@
+{% extends 'book_management/base.html' %}
+
+
+
+
+{% block content %}
+
+{% if request.user.userid.user_type == 'student' %}
+<h1>hi {{user}}, welcome to my company</h1>
+{% else %}
+<h1>Good morning, repected faculty {{user}}</h1>
+
+{% endif %}
+<!-- <h1>HOME INDEX PAGE,welcome my student</h1>
+
+<h1>home , my teacher hi</h1> -->
+
+
+{% endblock %}

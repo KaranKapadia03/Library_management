@@ -1,0 +1,99 @@
+{% extends 'book_management/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="pagetitle">Add Multiple Books</div>
+<section class="section">
+    <div class="row">
+        <div class="col-lg">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post">
+                        {% csrf_token %}
+                        {% with book_formset.empty_form as book_form %}
+                        <div id="formset-template" style="display: none;">
+                            {% for fld in  book_form.hidden_fields %}{{ fld }}{% endfor %}
+                            <div class="form-row align-items-end">
+                                <div class="form-group col-lg-11 mb-0">
+                                    {{ book_form.Name_Of_Book | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-lg-11 mb-0">
+                                    {{ book_form.Author | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-lg-11 mb-0">
+                                    {{ book_form.Available | as_crispy_field }}
+                                </div>
+
+                                <div class="form-group col-lg-2 remove-button">
+                                </div>
+                            </div>
+                        </div>
+                        {% endwith %}
+                        {{ book_formset.management_form }}
+                        {% for book_form in book_formset %}
+                        <div id="checklist_formset">
+                            {% for fld in  book_form.hidden_fields %}{{ fld }}{% endfor %}
+                            <div class="form-row align-items-end">
+                                <div class="form-group col-lg-11 mb-0">
+                                    {{ book_form.Name_Of_Book | as_crispy_field }}
+                                </div>
+                                <div class="form-group col-lg-11 mb-0">
+                                    {{ book_form.Author | as_crispy_field }}
+                                </div>
+
+                                 <div class="form-group col-lg-11 mb-0">
+                                     {{ book_form.Available | as_crispy_field }}
+                                 </div>
+
+
+                                <div class="form-group col-lg-2 remove-button">
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div id="extras-section"></div>
+                        <div class="d-grid gap-2 mt-3">
+                            <a type="button" class="btn btn-danger" href = "{{ request.META.HTTP_REFERER}}">BACK</a>
+                            <button class="btn btn-primary btn-block" type="submit">submit</button>
+                          </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}      
+
+                                  
+{% block bottomscript %}   
+
+<script>
+    
+    $(function () {
+        $('#checklist_formset').formset({
+            formTemplate: $('#formset-template').clone(),
+            prefix: 'book_formset',
+            addText: 'Add Another',
+            addCssClass: 'add-row btn btn-sm btn-primary mt-4 text-right',
+            addContainerClass: null,
+            deleteText: 'Remove',
+            deleteCssClass: 'delete-row btn btn-sm btn-secondary btn-block',
+            deleteContainerClass: 'remove-button',
+        });
+    });
+
+    $(".btn-primary").on('click', function () {
+        const fields = ["-Author", "-Name_Of_Book","-Available"];
+        for (let i = 0; i < fields.length; i++) {
+            $('*[id^="id_checklist_formset-"][id$="' + fields[i] + '"]').each(function (i) {
+                if (i > 0) {
+                    $(this).prop('required', true);
+                }
+            });
+        }
+    })
+</script>
+
+       
+{% endblock %}

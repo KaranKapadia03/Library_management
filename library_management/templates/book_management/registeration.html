@@ -1,0 +1,47 @@
+{% extends "book_management/base.html" %}
+
+{% block body_block %}
+    
+    <div class="container">
+       <h1 style="text-align: center; color: blue;">REGISTERATION PAGE</h1>
+       <br>
+       <br><br> 
+       <section class="section">
+        <div class="row">
+            <div class="col-lg-10 offset-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title"></h1>
+                        <table class="table table-bordered primary">
+                            <div class="card-body">
+
+            
+                                <form method="post">
+                                    {% csrf_token %}
+                                    {{ form.as_p }}
+                                    {{ user_id_form.as_p }}
+                                    
+                                    <div class="d-grid gap-2 mt-3">
+                                        <button class="btn btn-warning" type="submit">Register</button>
+                                      </div>
+                                </form>
+                            </div>  
+                                
+                                
+                        
+                        </table>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+
+
+
+
+
+  
+</div>
+{% endblock %}

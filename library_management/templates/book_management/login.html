@@ -1,0 +1,18 @@
+{% extends 'book_management/base.html' %}
+
+{% block content %}
+  <h2>Login</h2>
+  <form method="post" action="{% url 'book_management:login' %}">
+    {% csrf_token %}
+
+    <label for="username">USERNAME</label>
+      <input type="text" name="username">
+    <label for="password">PASSWORD</label>
+    <input type="password" name="password">
+     
+    
+
+    <input type="submit" value="Login"></button>
+  </form>
+  <p>Don't have an account? <a href="{% url 'book_management:UserRegisterCreateView' %}">Register</a></p>
+{% endblock %}

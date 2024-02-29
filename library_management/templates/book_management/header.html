@@ -1,0 +1,83 @@
+<header id="header"   >
+  <div><nav class="navbar bg-body-tertiary navbar navbar-expand-lg" style="background-color: cornflowerblue;" >
+   
+  
+ 
+    <ul class="navbar-nav">
+    <a class="logo d-flex align-items-center" href="#"><span class="d-none d-lg-block">Library Management</span></a>
+        
+       {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'admin:index'%}">ADMIN</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'book_management:FormsShow'%}">BOOK SHOW</a>
+            </li>
+                      <li class="nav-item">
+                <a class="nav-link" href="{% url 'book_management:UserRegisterCreateView'%}">REGISTERATION</a>
+            <li>
+             <li class="nav-item">
+                <a class="nav-link" href="{% url 'book_management:addMultipleBookView' %}">MultipleBOOKS ADD</a>
+             </li>
+             {% if request.user.userid.user_type == 'teacher' %}
+             <nav class="header-nav ms-auto">
+              <ul class ='d-flex align-items-center'>
+                <li class="dropdown">
+                  <a class="nav-link " href="#" data-bs-toggle="dropdown"><span class="d-none d-md-block dropdown-toggle ps-2">REQUESTS</span></a>
+                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-16px, 38.4px, 0px);"
+                      data-popper-placement="bottom-end" >
+                      <li><a class="nav-link" href="{% url 'book_management:trf'%}">Pending Requests</a></li>
+                      <li><a class="nav-link" href="{% url 'book_management:StudentRequestAnsweres' %}">Seen Requests</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li></nav>
+              </ul>
+            </li></ul>   
+            {% else %}
+            <nav class="header-nav ms-auto">
+              <ul class ='d-flex align-items-center'>
+                <li class="dropdown">
+                  <a class="nav-link " href="#" data-bs-toggle="dropdown"><span class="d-none d-md-block dropdown-toggle ps-2">TEACHER REPLY</span></a>
+                      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-16px, 38.4px, 0px);"
+                      data-popper-placement="bottom-end" >
+                      <li><a class="nav-link" href="{% url 'book_management:TeacherRequestAnswere'%}">Request Reply</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li></nav>
+              </ul>
+            </li></ul>   
+          
+
+             {% endif %}
+                <nav class="header-nav ms-auto">
+                  <ul class ='d-flex align-items-center'>
+                    <li class="dropdown">
+                      <a class="nav-link "
+                      href="#" data-bs-toggle="dropdown"><span class="d-none d-md-block dropdown-toggle ps-2">{{user}}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-16px, 38.4px, 0px);"
+                    data-popper-placement="bottom-end" >
+                    <li class="dropdown-header" aria-expanded="false">
+                      <h6> {{user}} </h6>
+                      <span>{{user.userid.user_type}}</span>
+                    </li>
+                    <li>
+                      <hr class="dropdown-divider">
+                    </li>
+                    <li><a class='dropdown-item' href="{% url 'logout'%}"><i class="bi bi-box-arrow-right"></i><span>LOGOUT</span></a></li>
+          
+                  </ul>
+                    </li>
+                  </ul>
+                </nav>
+            {% else %}                 
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'book_management:login'%}">login</a>
+            </li>
+            {% endif %}
+    </ul>
+  </div>
+</nav>
+</header>

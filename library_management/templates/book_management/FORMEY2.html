@@ -1,0 +1,16 @@
+{% extends "book_management/base.html" %}
+{% load render_table from django_tables2 %}
+{% block content %}
+{{ value|safe }}
+
+<h1>SPORTS TABLE</h1>
+{% render_table sports_table %}
+
+<br>
+<br>
+<br>
+<h2>MENFORM</h2>
+{% render_table men_table %}
+
+
+{% endblock %}
