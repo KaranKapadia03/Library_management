@@ -1,0 +1,91 @@
+First Need to change the python version  for the First we set up "Pyenv"------------>>
+
+Step 1 : curl https://pyenv.run | bash
+
+Step 2 : sudo nano ~/.bashrc
+Step 3 : Copy code and paste it to the Terminal
+
+------>>> ctrl o  
+------>>ctrl x
+
+Step 4 : exec $SHELL
+
+Now we ll install the version as per over requirement.
+
+Step 4 : pyenv install 3.9.9
+
+--------->check your version : pyenv global
+
+----------> python --version
+
+
+---------------------------------------------------------------------------------------------------->>
+-----------------------------POETRY--------------------------------------------------------->>
+
+Step 5 curl -sSL https://install.python-poetry.org | python3 -
+
+-----> now check poetry version : poetry --version
+----------------" if not show then restart your pc--------------<>>>
+
+Open your pycharm and either create or activate poetry shell
+
+Step 6 : poetry shell
+
+Step 7 : poetry install
+
+------> To add new package in the poetry : poetry add packagenaem@version
+
+
+
+---------------------------------------------------------------------------------------------------->>
+-----------------------------POSTGRES--------------------------------------------------------->>
+
+Step 8 : sudo -i -u postgres
+
+Step 9 : psql
+
+Step 10 : CREATE DATABASE oneteamdevlopment;
+
+Step 11 : psql -U postgres -h localhost oneteamdevlopment < oneteam_05_12_2023.sql 
+
+
+
+Open dbeaver-ce------------------->>//
+
+Step 0.1 click on New Database Connection
+Step 0.2 Select PostgreSQL
+Step 0.3 Fill the form
+	
+	Host : localhost
+	Database: oneteamdevlopment
+	password : surendra123
+
+
+
+
+
+
+
+---------------------------------------------------------------------------------------------------->>
+-----------------------------Setting.py--------------------------------------------------------->>
+
+In setting.py create .env
+DEBUG=True
+SECRET_KEY='surendra'
+
+DB_NAME='oneteamdevlopment'
+DB_USER='postgres'
+DB_PASSWORD='surendra123'
+DB_HOST='localhost'
+DB_PORT=5432
+
+IS_CAREERS_APP=False
+IS_JOB_LIVE=False
+
+
+
+
+
+---------------------------------------------------------------------------------------------------->>
+-----------------------------REDIS ERROR--------------------------------------------------------->>
+Step 10 : sudo apt-get install redis-server

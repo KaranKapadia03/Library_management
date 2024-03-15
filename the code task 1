@@ -1,0 +1,42 @@
+class GeneratExcel(View):
+    def get(self, request, *args, **kwargs):
+        data = customer_model.CompanyMaster.objects.all().order_by('-company_name')
+        output = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        output['Content-Disposition'] = 'attachment; filename=CUSTOMER_DATA.xlsx'
+        workbook = xlsxwriter.Workbook(output)
+        worksheet = workbook.add_worksheet("customer")
+        # worksheet2=workbook.add_worksheet("KARAN")
+        worksheet.set_column('A:A', 30)
+        worksheet.set_column('B:B', 30)
+        worksheet.set_column('C:C', 30)
+        worksheet.set_column('D:D', 15)
+        worksheet.set_column('E:E', 15)
+        worksheet.set_column('F:F', 15)
+        worksheet.set_column('G:G', 15)
+
+        headers = ['Company Name', 'Location', 'Email', 'Phone', 'Segment', 'Division', 'CompanyType',
+                   'extra']  # Replace with your actual field names
+        bold_format = workbook.add_format({'bold': True, 'font_color': 'red'})
+        for col_num, header in enumerate(headers):
+            worksheet.write(0, col_num, header, bold_format)
+        row_num = 1
+        for row_data in data:
+            worksheet.write(row_num, 0, row_data.company_name)  # Replace with your actual field names
+            worksheet.write(row_num, 1, row_data.location)
+            worksheet.write(row_num, 2, row_data.email)
+            worksheet.write(row_num, 3, row_data.phone_no)
+            data2 = row_data.company_type.all()
+            data3 = row_data.division.all()
+            data4 = row_data.segment.all()
+            for z in data4:
+                worksheet.write(row_num, 4, z.name)
+            for y in data3:
+                worksheet.write(row_num, 5, y.name)
+            for company_type in data2:
+                worksheet.write(row_num, 6, company_type.type)
+            row_num += 1
+        workbook.close()
+        # Create a response to return the Excel file
+        response = FileResponse(output)
+        response['Content-Disposition'] = 'attachment; filename=CUSTOMER_data.xlsx'
+        return response
