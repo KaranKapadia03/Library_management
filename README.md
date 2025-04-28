@@ -1,11 +1,15 @@
-Developed a Library Management System using Django and PostgreSQL, implementing:
+# Library Management System
+## Technologies: PostgreSQL, HTML, CSS, JavaScript, Bootstrap, Django
 
-CRUD operations (Create, Read, Update, Delete)
+Designed and developed a web-based Library Management System to streamline communication between students and teachers.
 
-Approval workflows
+Implemented approval flows, book issuance requests, and other operations using Django’s robust backend capabilities.
 
-Django Table View integration
+Built full CRUD (Create, Read, Update, Delete) functionalities for books, users, and requests.
 
-Database syncing with PostgreSQL
+Managed database operations efficiently with PostgreSQL.
 
-Exported backend data using XlsxWriter and contributed to additional projects.
+Created a responsive, user-friendly interface using HTML, CSS, JavaScript, and Bootstrap.
+
+Ensured smooth interaction between frontend and backend for real-time updates and notifications.
+
